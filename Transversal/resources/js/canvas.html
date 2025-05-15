@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Gràfic de barres</title>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="400"></canvas>
+
+  <script>
+    class GraficaBarres {
+      constructor(canvas, context, dades, titol, colors) {
+        this.canvas = canvas;
+        this.ctx = context;
+        this.dades = dades;
+        this.titol = titol;
+        this.colors = colors;
+
+        this.marge = 40;
+        this.amplada = canvas.width;
+        this.alcada = canvas.height;
+
+        this.dibuixarGrafica();
+      }
+
+      dibuixarGrafica() {
+        const ctx = this.ctx;
+        const dades = this.dades;
+        const colors = this.colors;
+
+        const ampleUtil = this.amplada - this.marge * 2;
+        const altUtil = this.alcada - this.marge * 2;
+
+        const numBarres = dades.length;
+        const ampleBarra = ampleUtil / (numBarres * 1.5);
+        const espai = ampleBarra / 2;
+
+        const valorMaxim = Math.max(...dades);
+        const escalaAltura = altUtil / valorMaxim;
+
+        const numLinies = 6;
+        const pas = Math.ceil(valorMaxim / numLinies / 10) * 10;
+        ctx.font = "12px sans-serif";
+        ctx.fillStyle = "black";
+
+        for (let valor = 0; valor <= valorMaxim; valor += pas) {
+          const y = this.alcada - this.marge - valor * escalaAltura;
+          this.dibuixarLinia(ctx, this.marge, y, this.amplada - this.marge, y, "#ccc");
+          ctx.fillText(valor.toString(), 5, y + 4);
+        }
+
+        for (let i = 0; i < dades.length; i++) {
+          const valor = dades[i];
+          const x = this.marge + i * (ampleBarra + espai);
+          const altura = valor * escalaAltura;
+          const y = this.alcada - this.marge - altura;
+
+          this.dibuixarBarra(ctx, x, y, ampleBarra, altura, colors[i]);
+        }
+
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(this.titol, this.amplada / 2, this.alcada - 10);
+      }
+
+      dibuixarBarra(ctx, x, y, ample, alt, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, ample, alt);
+      }
+
+      dibuixarLinia(ctx, x1, y1, x2, y2, color) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = color;
+        ctx.stroke();
+      }
+    }
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const dades = [23, 15, 56, 21, 55, 60];
+    const colors = ["lightgreen", "red", "green", "magenta", "blue", "yellow"];
+    const titol = "Gestión de Stock";
+
+    new GraficaBarres(canvas, ctx, dades, titol, colors);
+  </script>
+</body>
+</html>
