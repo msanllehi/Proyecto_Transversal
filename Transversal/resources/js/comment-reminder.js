@@ -1,11 +1,3 @@
-/**
- * Sistema de recordatorios de comentarios para productos comprados
- * 
- * Este script muestra un modal con productos pendientes de comentar:
- * 1. Al iniciar sesión
- * 2. Al completar una compra
- */
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Inicializando sistema de recordatorios de comentarios');
     
@@ -15,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Definir variables comunes
+    // Variables comunes
     const isUserAuthenticated = document.body.classList.contains('user-authenticated');
     const isHomePage = window.location.pathname === '/' || 
                        window.location.pathname === '/home' || 
@@ -52,10 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Caso 3: Inicio de sesión normal
     if (isUserAuthenticated && isHomePage) {
-        // SOLUCIÓN SIMPLIFICADA: 
-        // En lugar de intentar detectar si venimos del login, vamos a implementar una solución
-        // que aprovecha el almacenamiento local para recordar si ya mostramos el modal o no
-        
+
         // Obtenemos la fecha y hora actual
         const now = new Date().getTime();
         
@@ -63,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const lastModalShow = sessionStorage.getItem('modal_last_shown_at');
         const userIdentifier = sessionStorage.getItem('user_identifier');
         
-        // Obtener un identificador para el usuario actual (puede ser cualquier información disponible)
-        // Por ejemplo, elementos en la página que contengan el nombre de usuario, ID, etc.
         const currentUserIdentifier = document.querySelector('.user-name')?.textContent.trim() || 
                                      document.querySelector('[data-user-id]')?.dataset.userId || 
                                      Math.random().toString(); // Fallback aleatorio
@@ -78,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const isFirstTimeOrUserChanged = !lastModalShow || (userIdentifier !== currentUserIdentifier);
         
         // Verificar si han pasado al menos 2 segundos desde la última vez
-        // (esto es para evitar mostrar el modal varias veces si la página se recarga rápidamente)
         const hasTimeElapsed = !lastModalShow || (now - parseInt(lastModalShow)) > 2000;
         
         if (isFirstTimeOrUserChanged && hasTimeElapsed) {

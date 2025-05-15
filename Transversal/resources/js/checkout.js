@@ -1,5 +1,3 @@
-// Checkout.js - Maneja la funcionalidad de la página de checkout
-
 // Definición de imágenes de productos
 const PRODUCT_IMAGES = {
     '1': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836',

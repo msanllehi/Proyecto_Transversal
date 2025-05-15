@@ -133,7 +133,7 @@
     
     <div class="footer">
         <p>Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.</p>
-        <p>&copy; {{ date('Y') }} Tu Empresa. Todos los derechos reservados.</p>
+        <p>&copy; {{ date('Y') }} DesperATE S.L. Todos los derechos reservados.</p>
     </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 import './bootstrap';
 
-// --- MAPA DE IMÁGENES POR ID DE PRODUCTO ---
+// --- 
+// 
+// --- IMÁGENES POR ID DE PRODUCTO ---
 const PRODUCT_IMAGES = {
     '1': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836',
     '2': 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0',
